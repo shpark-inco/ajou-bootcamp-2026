@@ -1,0 +1,27 @@
+{
+  "name": "Single Cell AI Workshop",
+
+  "image": "mcr.microsoft.com/devcontainers/python:3.12",
+
+  "secrets": {
+    "ANTHROPIC_API_KEY": {
+      "description": "Anthropic Console에서 발급한 API Key를 입력하세요."
+    }
+  },
+
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+
+  "waitFor": "postCreateCommand",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "anthropic.claude-code",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-toolsai.jupyter",
+        "ms-toolsai.jupyter-renderers"
+      ]
+    }
+  }
+}
