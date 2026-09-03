@@ -12,27 +12,48 @@ echo "========================================"
 # --------------------------------------------------
 
 echo
-echo "[1/3] Installing Python packages..."
+echo "[1/4] Installing Python packages..."
 
 pip install -r requirements.txt
 
 
 # --------------------------------------------------
-# 2. Claude Code
+# 2. uv / uvx
 # --------------------------------------------------
 
 echo
-echo "[2/3] Installing Claude Code..."
+echo "[2/4] Installing uv / uvx..."
+
+# 아래 workshop 설정이 $HOME/.local/bin 을 이미 PATH에 추가하므로
+# 설치 위치를 거기에 명시적으로 고정하고(installer 기본값은 XDG_BIN_HOME에 좌우됨),
+# installer가 rc 파일을 중복으로 건드리지 않게 한다.
+export UV_INSTALL_DIR="$HOME/.local/bin"
+export UV_NO_MODIFY_PATH=1
+
+curl -fsSL https://astral.sh/uv/install.sh | sh
+
+export PATH="$HOME/.local/bin:$PATH"
+
+uv --version
+uvx --version
+
+
+# --------------------------------------------------
+# 3. Claude Code
+# --------------------------------------------------
+
+echo
+echo "[3/4] Installing Claude Code..."
 
 curl -fsSL https://claude.ai/install.sh | bash
 
 
 # --------------------------------------------------
-# 3. Claude Code wrapper
+# 4. Claude Code wrapper
 # --------------------------------------------------
 
 echo
-echo "[3/3] Configuring Claude Code..."
+echo "[4/4] Configuring Claude Code..."
 
 CLAUDE_SHELL_CONFIG="$HOME/.claude-workshop.sh"
 
