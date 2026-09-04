@@ -46,21 +46,6 @@ claude
 
 ![API key 확인 화면](docs/images/setup-1-apikey.png)
 
-```
-Welcome to Claude Code v2.1.260
-
-  Detected a custom API key in your environment
-
-  ANTHROPIC_API_KEY: sk-ant-••••••••••••••••
-
-  Do you want to use this API key?
-
-  > Yes
-    No (recommended)
-
-  Enter to confirm · Esc to cancel
-```
-
 `Yes`에 커서를 두고 **Enter**. 실습용 API key가 환경에 미리 설정되어 있고,
 그 키를 쓰겠다고 답하는 화면입니다.
 
@@ -71,36 +56,11 @@ Welcome to Claude Code v2.1.260
 
 ![Security notes 화면](docs/images/setup-2-security.png)
 
-```
-  Security notes:
-
-  1. Claude can make mistakes.
-     You're responsible for Claude's actions and should always
-     review them, especially when running code.
-
-  2. Due to prompt injection risks, only use it with code you trust
-     Learn more: https://code.claude.com/docs/en/security
-
-  Press Enter to continue…
-```
-
 읽고 **Enter**. 선택지가 없는 안내 화면입니다.
 
 ### 3. 터미널 설정 — `1. Yes, use recommended settings`
 
 ![터미널 설정 화면](docs/images/setup-3-terminal.png)
-
-```
-  Use Claude Code's terminal setup?
-
-  For the optimal coding experience, enable the recommended settings
-  for your terminal: Shift+Enter for newlines
-
-  > 1. Yes, use recommended settings
-    2. No, maybe later with /terminal-setup
-
-  Enter to confirm · Esc to skip
-```
 
 `1`을 선택하고 **Enter**. 긴 프롬프트를 여러 줄로 입력할 때
 **Shift+Enter**로 줄바꿈할 수 있게 해 줍니다. 4번 프롬프트를 붙여넣을 때 필요합니다.
@@ -108,21 +68,6 @@ Welcome to Claude Code v2.1.260
 ### 4. 폴더 접근 권한 — `Yes, I trust this folder`
 
 ![폴더 접근 권한 화면](docs/images/setup-4-trust.png)
-
-```
-  /workspaces/ajou-bootcamp-2026
-
-  Quick safety check: Is this a project you created or one you trust?
-  (Like your own code, a well-known open source project, or work from
-  your team). If not, take a moment to review what's in this folder first.
-
-  Claude Code'll be able to read, edit, and execute files here.
-
-    No, exit
-  > Yes, I trust this folder
-
-  Enter to confirm · Esc to cancel
-```
 
 `Yes, I trust this folder`를 선택하고 **Enter**.
 이 폴더의 파일을 읽고, 수정하고, 실행해도 되는지 묻는 확인입니다.
