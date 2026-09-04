@@ -40,30 +40,96 @@ curl -fsSL https://claude.ai/install.sh | bash
 claude
 ```
 
-### API key 확인 창 — **1. Yes**를 선택합니다
+처음 실행하면 아래 네 화면이 순서대로 나옵니다. 순서대로 답하면 됩니다.
 
-실행하면 아래 화면이 나옵니다.
+### 1. API key 확인 — `Yes`
+
+![API key 확인 화면](docs/images/setup-1-apikey.png)
 
 ```
-Welcome to Claude Code v2.1.241
+Welcome to Claude Code v2.1.260
 
   Detected a custom API key in your environment
 
-  ANTHROPIC_API_KEY: sk-ant-...NXjZ3QAA
+  ANTHROPIC_API_KEY: sk-ant-••••••••••••••••
 
   Do you want to use this API key?
 
-  > 1. Yes
-    2. No (recommended)
+  > Yes
+    No (recommended)
 
   Enter to confirm · Esc to cancel
 ```
 
-**`1. Yes`에 커서를 두고 Enter**를 누르세요.
-실습용 API key가 환경에 미리 설정되어 있고, 그 키를 쓰겠다고 답하는 화면입니다.
+`Yes`에 커서를 두고 **Enter**. 실습용 API key가 환경에 미리 설정되어 있고,
+그 키를 쓰겠다고 답하는 화면입니다.
 
-> `2. No (recommended)`라고 적혀 있지만 **이 실습에서는 Yes가 맞습니다.**
+> `No (recommended)`라고 적혀 있지만 **이 실습에서는 Yes가 맞습니다.**
 > 개인 Claude 계정으로 로그인해 쓰는 일반적인 상황을 기준으로 한 표시입니다.
+
+### 2. Security notes — **Enter**
+
+![Security notes 화면](docs/images/setup-2-security.png)
+
+```
+  Security notes:
+
+  1. Claude can make mistakes.
+     You're responsible for Claude's actions and should always
+     review them, especially when running code.
+
+  2. Due to prompt injection risks, only use it with code you trust
+     Learn more: https://code.claude.com/docs/en/security
+
+  Press Enter to continue…
+```
+
+읽고 **Enter**. 선택지가 없는 안내 화면입니다.
+
+### 3. 터미널 설정 — `1. Yes, use recommended settings`
+
+![터미널 설정 화면](docs/images/setup-3-terminal.png)
+
+```
+  Use Claude Code's terminal setup?
+
+  For the optimal coding experience, enable the recommended settings
+  for your terminal: Shift+Enter for newlines
+
+  > 1. Yes, use recommended settings
+    2. No, maybe later with /terminal-setup
+
+  Enter to confirm · Esc to skip
+```
+
+`1`을 선택하고 **Enter**. 긴 프롬프트를 여러 줄로 입력할 때
+**Shift+Enter**로 줄바꿈할 수 있게 해 줍니다. 4번 프롬프트를 붙여넣을 때 필요합니다.
+
+### 4. 폴더 접근 권한 — `Yes, I trust this folder`
+
+![폴더 접근 권한 화면](docs/images/setup-4-trust.png)
+
+```
+  /workspaces/ajou-bootcamp-2026
+
+  Quick safety check: Is this a project you created or one you trust?
+  (Like your own code, a well-known open source project, or work from
+  your team). If not, take a moment to review what's in this folder first.
+
+  Claude Code'll be able to read, edit, and execute files here.
+
+    No, exit
+  > Yes, I trust this folder
+
+  Enter to confirm · Esc to cancel
+```
+
+`Yes, I trust this folder`를 선택하고 **Enter**.
+이 폴더의 파일을 읽고, 수정하고, 실행해도 되는지 묻는 확인입니다.
+실습에서 Claude가 분석 스크립트를 만들고 실행해야 하므로 허용해야 진행됩니다.
+
+경로가 `/workspaces/ajou-bootcamp-2026`인지 확인하고 선택하세요.
+처음 여는 폴더마다 한 번씩 묻습니다.
 
 ### 모델 선택
 
@@ -79,6 +145,37 @@ Sonnet을 권장합니다. 이 실습은 tool call이 많아서 빠른 응답이
 /status     # 모델·API key·작업 디렉터리 확인
 /mcp        # MCP 서버 연결 상태 확인
 ```
+
+### API key 오류가 날 때
+
+`Invalid API key · Fix external API key`가 뜨면 먼저 키가 실제로 거절되는지 확인합니다.
+
+```bash
+curl -s -o /dev/null -w "%{http_code}\n" https://api.anthropic.com/v1/models \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01"
+```
+
+**`401`이 나오면** — 키 값 자체의 문제입니다. 접두사와 길이를 확인하세요.
+붙여넣을 때 앞뒤에 공백이나 줄바꿈이 섞여 들어가는 경우가 가장 흔합니다.
+
+```bash
+echo "$ANTHROPIC_API_KEY" | cut -c1-15   # sk-ant-api03- 으로 시작하는지
+echo -n "$ANTHROPIC_API_KEY" | wc -c     # 길이가 비정상적으로 길지 않은지
+```
+
+Codespaces secret을 고친 뒤에는 **Codespace를 재시작**해야 새 값이 반영됩니다.
+터미널만 새로 열어서는 바뀌지 않습니다.
+
+**`200`이 나오면** — 키는 정상이고 Claude Code가 예전에 저장한 다른 키를 쓰고 있는 것입니다.
+
+```bash
+claude auth logout
+claude
+```
+
+> 시작할 때 나오는 `Remote managed settings failed to load (401)` 경고는
+> 조직 단위 관리 설정을 못 받아왔다는 뜻입니다. **대화가 정상적으로 되면 무시해도 됩니다.**
 
 ---
 
@@ -104,20 +201,34 @@ curl -fsSL https://biomcp.org/install.sh | bash
 
 `biomcp` 바이너리가 `~/.local/bin`에 설치됩니다. `biomcp --version`으로 확인하세요.
 
-이어서 `claude` 안에서:
+이어서 `claude` 안에서 한 줄씩 실행합니다.
+
+마켓플레이스 등록:
 
 ```
 /plugin marketplace add genomoncology/biomcp
+```
+
+플러그인 설치:
+
+```
 /plugin install biomcp@biomcp
 ```
 
 ### ToolUniverse
 
 ToolUniverse는 CLI 설치 없이 플러그인만 넣으면 됩니다.
-`claude` 안에서:
+`claude` 안에서 한 줄씩 실행합니다.
+
+마켓플레이스 등록:
 
 ```
 /plugin marketplace add mims-harvard/ToolUniverse
+```
+
+플러그인 설치:
+
+```
 /plugin install tooluniverse@tooluniverse
 ```
 
