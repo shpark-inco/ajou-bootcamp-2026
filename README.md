@@ -260,9 +260,3 @@ Claude가 research plan → evidence → ligand landscape → 비교 분석 → 
 ```
 우리가 진행한 research에서 ligand-protein을 3d 시각화로 html로 만들어줄래? 
 ```
-
-Agent 만들기!! 
-
-```
-그럼 현재까지 작업한 내용을 Agent로 만들기 위한 플랜을 세워줄래? 
-```
