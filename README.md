@@ -138,6 +138,12 @@ claude
 
 BioMCP는 로컬 CLI를 먼저 설치한 뒤 플러그인을 붙입니다.
 
+> **`claude`가 실행 중이면 먼저 빠져나오세요.**
+> 앞 단계에서 `claude`를 켜 둔 상태라면 `/exit`를 입력하거나 **Ctrl+C를 두 번** 눌러
+> 셸 프롬프트(`$`)로 돌아옵니다. 아래 `curl`은 Claude Code 프롬프트가 아니라
+> **터미널(셸)에서** 실행하는 명령입니다. Claude와 대화하는 창에 그대로 붙여넣으면
+> 명령이 실행되지 않고 Claude에게 보내는 메시지가 됩니다.
+
 터미널에서:
 
 ```bash
@@ -146,7 +152,7 @@ curl -fsSL https://biomcp.org/install.sh | bash
 
 `biomcp` 바이너리가 `~/.local/bin`에 설치됩니다. `biomcp --version`으로 확인하세요.
 
-이어서 `claude` 안에서 한 줄씩 실행합니다.
+설치가 끝나면 `claude`를 다시 실행하고, 그 안에서 한 줄씩 입력합니다.
 
 마켓플레이스 등록:
 
